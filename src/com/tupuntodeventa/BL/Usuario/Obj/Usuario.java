@@ -4,21 +4,24 @@ public class Usuario {
     private int clave;
     private String correoElectronico;
     private String nombreUsuario;
+    private String contrasenna;
     private String nombreCompleto;
     private String fechaNacimiento;
     private int edad;
     private String genero;
     private int telefono;
 
-    public Usuario(int clave, String correoElectronico, String nombreUsuario, String nombreCompleto, String fechaNacimiento, int edad, String genero, int telefono) {
+    public Usuario(int clave, String correoElectronico, String nombreUsuario, String contrasena, String nombreCompleto, String fechaNacimiento, int edad, String genero, int telefono) {
         this.clave = clave;
         this.correoElectronico = correoElectronico;
         this.nombreUsuario = nombreUsuario;
+        this.contrasenna = contrasena;
         this.nombreCompleto = nombreCompleto;
         this.fechaNacimiento = fechaNacimiento;
         this.edad = edad;
         this.genero = genero;
         this.telefono = telefono;
+
     }
 
     public String toString() {
@@ -28,7 +31,7 @@ public class Usuario {
     }
 
     public String getInfoLogin() {
-        String infoUsuarioLogin = this.nombreUsuario + "_" + this.clave;
+        String infoUsuarioLogin = this.nombreUsuario + "_" + this.contrasenna;
 
         return infoUsuarioLogin;
     }

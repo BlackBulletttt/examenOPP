@@ -8,18 +8,18 @@ import java.util.ArrayList;
 public class UsuarioController {
     UsuarioBL logicaUsuarios = new UsuarioBL();
 
-    public boolean registrarAdmin(int clave, String correoElectronico, String nombreUsuarrio, String nombreCompleto, String fechaNacimiento, int edad, String genero, int telefono) {
-        boolean err = false;
+    public boolean registrarAdmin(int clave, String correoElectronico, String nombreUsuario, String contrasena, String nombreCompleto, String fechaNacimiento, int edad, String genero, int telefono) {
+        boolean err;
 
-        Admin nuevoAdmin = new Admin(clave, correoElectronico, nombreUsuarrio, nombreCompleto, fechaNacimiento, edad, genero, telefono);
+        Admin nuevoAdmin = new Admin(clave, correoElectronico, nombreUsuario, contrasena, nombreCompleto, fechaNacimiento, edad, genero, telefono);
 
         err = logicaUsuarios.registrarUsuario(nuevoAdmin);
 
         return err;
     }
 
-    public boolean registrarCliente(int clave, String correoElectronico, String nombreUsuario, String nombreCompleto, String fechaNacimiento, int edad, String genero, int telefono, int identificacion, String direccionExacta, String canton, String distrito, String provincia, int distancia) {
-        Cliente nuevoCliente = new Cliente(clave, correoElectronico, nombreUsuario, nombreCompleto, fechaNacimiento, edad, genero, telefono, identificacion, direccionExacta, canton, distrito, provincia, distancia);
+    public boolean registrarCliente(int clave, String correoElectronico, String nombreUsuario, String contrasena, String nombreCompleto, String fechaNacimiento, int edad, String genero, int telefono, int identificacion, String direccionExacta, String canton, String distrito, String provincia, int distancia) {
+        Cliente nuevoCliente = new Cliente(clave, correoElectronico, nombreUsuario, contrasena, nombreCompleto, fechaNacimiento, edad, genero, telefono, identificacion, direccionExacta, canton, distrito, provincia, distancia);
 
         boolean err = logicaUsuarios.registrarUsuario(nuevoCliente);
 

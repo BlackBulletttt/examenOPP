@@ -8,8 +8,8 @@ public class Cliente extends Usuario{
     private int identificacion;
     private ArrayList<Direccion> direcciones = new ArrayList<>();
 
-    public Cliente(int clave, String correoElectronico, String nombreUsuario, String nombreCompleto, String fechaNacimiento, int edad, String genero, int telefono, int identificacion, String direccionExacta, String canton, String distrito, String provincia, int distancia) {
-        super(clave, correoElectronico, nombreUsuario, nombreCompleto, fechaNacimiento, edad, genero, telefono);
+    public Cliente(int clave, String correoElectronico, String nombreUsuario, String contrasena, String nombreCompleto, String fechaNacimiento, int edad, String genero, int telefono, int identificacion, String direccionExacta, String canton, String distrito, String provincia, int distancia) {
+        super(clave, correoElectronico, nombreUsuario, contrasena, nombreCompleto, fechaNacimiento, edad, genero, telefono);
         this.identificacion = identificacion;
         this.direcciones.add(new Direccion(direccionExacta, canton, distrito, provincia, distancia));
     }
