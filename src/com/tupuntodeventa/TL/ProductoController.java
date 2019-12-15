@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import com.tupuntodeventa.BL.Producto.Obj.*;
 import com.tupuntodeventa.BL.Producto.ProductoBL;
 
-public class ProductoController {
-    ProductoBL logicaProductos = new ProductoBL();
+public class ProductoController extends CoreController{
 
     public int registrarSencillo(int codigo, String descripcion, double precio) {
         Sencillo nuevoSencillo = new Sencillo(codigo, descripcion, precio);

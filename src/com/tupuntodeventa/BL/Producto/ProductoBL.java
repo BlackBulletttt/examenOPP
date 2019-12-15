@@ -35,17 +35,29 @@ public class ProductoBL {
         return listaInfoProductos;
     }
 
-    public Sencillo obtenerSencilloById(int plato) {
+    public Sencillo obtenerSencilloById(int codigo) {
         Sencillo sencilloEncontrado = null;
 
         for(Producto producto : listaProductos){
             if(producto instanceof Sencillo){
-                if(((Sencillo)producto).getCodigo() == plato){
+                if(((Sencillo)producto).getCodigo() == codigo){
                     sencilloEncontrado = ((Sencillo)producto);
                 }
             }
         }
 
         return sencilloEncontrado;
+    }
+
+    public Producto obtenerProductoBtId(int codigo){
+        Producto productoEncontrado = null;
+
+        for(Producto producto : listaProductos){
+            if(producto.getCodigo() == codigo){
+                productoEncontrado = producto;
+            }
+        }
+
+        return productoEncontrado;
     }
 }

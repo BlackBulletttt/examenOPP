@@ -33,7 +33,7 @@ public class Usuario {
     }
 
     public String getInfoLogin() {
-        String infoUsuarioLogin = this.nombreUsuario + "_" + this.contrasenna;
+        String infoUsuarioLogin = this.nombreUsuario + "_" + this.contrasenna + "_" + this.nombreCompleto;
 
         return infoUsuarioLogin;
     }

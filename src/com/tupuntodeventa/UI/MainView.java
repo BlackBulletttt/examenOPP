@@ -14,6 +14,7 @@ public class MainView {
     static CuponController gestorCupones = new CuponController();
     static  ProductoController gestorProductos = new ProductoController();
     static PuestoController gestorPuestos = new PuestoController();
+    static OrdenController gestorOrdenes = new OrdenController();
 
     static PerfilView perfilView = new PerfilView();
 
@@ -110,7 +111,7 @@ public class MainView {
 //              separar la informacion que viene en `infoUsuarioLogin` para su verificacion
                 String nombreUsuarioSys = infoUsuarioLogin.split("_")[0],
                         contrasenaUsuarioSys = infoUsuarioLogin.split("_")[1],
-                        tipoUsuario = infoUsuarioLogin.split("_")[2];
+                        tipoUsuario = infoUsuarioLogin.split("_")[3];
 
                 if(tipoUsuario.equals("0")){
                     adm = true;

@@ -1,5 +1,7 @@
 package com.tupuntodeventa.UI;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class PerfilView extends MainView {
@@ -7,10 +9,10 @@ public class PerfilView extends MainView {
 	public void perfilMenu(){
 		int opcionMenu = 0;
 		do{
-			System.out.println("\n=== Bienvenido a <Su perfil> " +usuarioActivo.split("_")[0]+" ===\n");
+			System.out.println("\n=== Bienvenido a <Su perfil> " +usuarioActivo.split("_")[2]+" ===\n");
 
 //			brindar las opciones segun el tipo de usuario activo
-			switch (usuarioActivo.split("_")[2]){
+			switch (usuarioActivo.split("_")[3]){
 				case "0":
 					System.out.println("[1]. Registrar puestos");
 					System.out.println("[2]. Listar puestos");
@@ -80,7 +82,7 @@ public class PerfilView extends MainView {
 				break;
 
 			case 9:
-//				listarOrdenes();
+				listarOrdenes();
 				break;
 		}
 	}
@@ -97,11 +99,11 @@ public class PerfilView extends MainView {
 				break;
 
 			case 2:
-//				registrarOrden();
+				registrarOrdenRemoto();
 				break;
 
 			case 3:
-//				listarOrdenes();
+				listarOrdenes();
 				break;
 		}
 
@@ -182,6 +184,59 @@ public class PerfilView extends MainView {
 			}
 	}
 
+	public void registrarOrdenRemoto(){
+		in.nextLine();
+		String nombreCompleto = usuarioActivo.split("_")[2];
+
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		String fecha_hora = (formato.format(LocalDateTime.now()));
+
+		ArrayList<Integer> listaCodigoProductos = new ArrayList<>();
+
+		int opcion;
+		do{
+			listarProductos();
+			System.out.println("Ingrese el CODIGO de los productos que dese agregar a su orden");
+
+			int codigoProductos = in.nextInt();
+			listaCodigoProductos.add(codigoProductos);
+
+			System.out.println("[1]. Registrar nuevo producto");
+			System.out.println("[0]. Dejar de ordenar");
+
+			opcion = in.nextInt();
+		}while(opcion != 0);
+
+		in.nextLine();
+		System.out.println("Ingrese algun detalle para la orden");
+		String detalle = in.nextLine();
+
+		boolean err = gestorOrdenes.registrarOrden(nombreCompleto, fecha_hora, detalle, listaCodigoProductos);
+
+		if(err){
+			System.err.println("Hubo un error en el proceso, recuerde que no puede mezclar productos sencillos y combos en una misma orden");
+		}else{
+			System.out.println("Su orden se ha registrado correctamente");
+		}
+
+	}
+
+	public void listarOrdenes(){
+		String nombreCompletoUsuario;
+
+		if(usuarioActivo.split("_")[3].equals("0")){
+			nombreCompletoUsuario = "adm";
+		}else{
+			nombreCompletoUsuario = usuarioActivo.split("_")[2];
+		}
+
+		ArrayList<String> listaInfoOrdenes = gestorOrdenes.obtenerInfoOrdenes(nombreCompletoUsuario);
+
+		for(String infoOrden : listaInfoOrdenes){
+			System.out.println(infoOrden);
+		}
+	}
+
 	public void registrarCupon() {
 		if(gestorCupones.obtenerInfoCupones().size() !=0){
 			System.err.println("Hay cupones que no se han utilizado, debe esperar a que se acaben");
@@ -208,9 +263,6 @@ public class PerfilView extends MainView {
 				}
 			}
 		}
-
-		int opcionMenu = menu();
-		procesarOpcion(opcionMenu);
 	}
 
 	public void registrarProducto() {
@@ -226,8 +278,7 @@ public class PerfilView extends MainView {
 
 			switch (opcionProducto){
 				case 0:
-					int opcionMenu = menu();
-					procesarOpcion(opcionMenu);
+					perfilMenu();
 					break;
 
 				case 1: registrarProductoSencillo();
@@ -265,9 +316,6 @@ public class PerfilView extends MainView {
 				System.err.println("El producto ya esta agregado en el sistema.");
 				break;
 		}
-
-		int opcionMenu = menu();
-		procesarOpcion(opcionMenu);
 	}
 
 	public void registrarProductoCombo() {
@@ -295,9 +343,6 @@ public class PerfilView extends MainView {
 				System.out.println("El producto ya esta agregado en el sistema.");
 				break;
 		}
-
-		int opcionMenu = menu();
-		procesarOpcion(opcionMenu);
 	}
 
 	public void listarUsuarios() {
@@ -306,9 +351,6 @@ public class PerfilView extends MainView {
 		for(String infoUsuario : listaInfoUsuarios){
 			System.out.println(infoUsuario);
 		}
-
-		int opcionMenu = menu();
-		procesarOpcion(opcionMenu);
 	}
 
 	public void listarCupones() {
@@ -317,9 +359,6 @@ public class PerfilView extends MainView {
 		for(String infoCupon : listaInfoCupones){
 			System.out.println(infoCupon);
 		}
-
-		int opcionMenu = menu();
-		procesarOpcion(opcionMenu);
 	}
 
 	public void listarProductos() {
@@ -327,9 +366,7 @@ public class PerfilView extends MainView {
 
 		for(String infoProducto : listaInfoProductos){
 			System.out.println(infoProducto);
+			System.out.println("============");
 		}
-
-		int opcionMenu = menu();
-		procesarOpcion(opcionMenu);
 	}
 }
