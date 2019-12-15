@@ -1,6 +1,7 @@
 package com.tupuntodeventa.BL.Usuario.Obj;
 
 public class Usuario {
+    private int identificacion;
     private int clave;
     private String correoElectronico;
     private String nombreUsuario;
@@ -11,7 +12,8 @@ public class Usuario {
     private String genero;
     private int telefono;
 
-    public Usuario(int clave, String correoElectronico, String nombreUsuario, String contrasena, String nombreCompleto, String fechaNacimiento, int edad, String genero, int telefono) {
+    public Usuario(int identificacion, int clave, String correoElectronico, String nombreUsuario, String contrasena, String nombreCompleto, String fechaNacimiento, int edad, String genero, int telefono) {
+        this.identificacion = identificacion;
         this.clave = clave;
         this.correoElectronico = correoElectronico;
         this.nombreUsuario = nombreUsuario;
@@ -39,11 +41,19 @@ public class Usuario {
     public boolean equals(Usuario usuario){
         boolean err = false;
 
-        if(this.clave == usuario.getClave()){
+        if(this.identificacion == usuario.getIdentificacion()){
             err = true;
         }
 
         return err;
+    }
+
+    public int getIdentificacion() {
+        return identificacion;
+    }
+
+    public void setIdentificacion(int identificacion) {
+        this.identificacion = identificacion;
     }
 
     public int getClave() {
@@ -68,6 +78,14 @@ public class Usuario {
 
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getContrasenna() {
+        return contrasenna;
+    }
+
+    public void setContrasenna(String contrasenna) {
+        this.contrasenna = contrasenna;
     }
 
     public String getNombreCompleto() {

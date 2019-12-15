@@ -21,6 +21,7 @@ public class PerfilView extends MainView {
 					System.out.println("[7]. Listar cupones");
 					System.out.println("[8]. Listar productos");
 					System.out.println("[9]. Listar ordenes");
+					System.out.println("[0]. Cerrar sesión");
 
 					opcionMenu = in.nextInt();
 					procesarOpcionAdmin(opcionMenu);
@@ -30,12 +31,12 @@ public class PerfilView extends MainView {
 					System.out.println("[1]. Lista productos");
 					System.out.println("[2]. Registrar órden");
 					System.out.println("[3]. Listar órdenes");
+					System.out.println("[0]. Cerrar sesión");
 
 					opcionMenu = in.nextInt();
 					procesarOpcionCliente(opcionMenu);
 					break;
 			}
-			System.out.println("[0]. Cerrar sesión");
 		}while(opcionMenu != 0);
 	}
 
@@ -55,7 +56,7 @@ public class PerfilView extends MainView {
 				break;
 
 			case 3:
-//				registrarEmpleados();
+				registrarEmpleado();
 				break;
 
 			case 4:
@@ -134,12 +135,51 @@ public class PerfilView extends MainView {
 		}
 	}
 
+	public static ArrayList<String> obtenerInfoPuesto(String nombrePuesto){
+		ArrayList<String> infoPuesto = gestorPuestos.obtenerInfoPuesto(nombrePuesto);
+
+		return infoPuesto;
+	}
+
 	public void listarPuestos(){
 		ArrayList<String> listaInfoPestos = gestorPuestos.obtenerListaInfoPuestos();
 
 		for(String infoPuesto : listaInfoPestos){
 			System.out.println(infoPuesto);
 		}
+	}
+
+	public static void registrarEmpleado(){
+		ArrayList<String> infoUsuario = MainView.solicitarInfoUsuario();
+
+		int identificacion = Integer.parseInt(infoUsuario.get(0));
+		int clave = Integer.parseInt(infoUsuario.get(1));
+		String correoElectronico = infoUsuario.get(2);
+		String nombreUsuario = infoUsuario.get(3);
+		String contrasena = infoUsuario.get(4);
+		String nombreCompleto = infoUsuario.get(5);
+		String fechaNacimiento = infoUsuario.get(6);
+		int edad = Integer.parseInt(infoUsuario.get(7));
+		String genero = infoUsuario.get(8);
+		int telefono = Integer.parseInt(infoUsuario.get(9));
+
+		System.out.println("Ingrese el nombre del puesto que desea agregar al empleado");
+		String nombrePuesto = in.nextLine();
+
+			int err = gestorUsuarios.registrarEmpleado(identificacion, clave, correoElectronico, nombreUsuario, contrasena, nombreCompleto, fechaNacimiento, edad, genero, telefono, nombrePuesto);
+
+			switch (err){
+				case 1:
+					System.err.println("Ya existe un usuario con esa identificacion.");
+					break;
+
+				case 2:
+					System.err.println("No existe un puesto con ese nombre.");
+					break;
+
+				case 0:
+					System.out.println("El empleado se ha registrado correctamente.");
+			}
 	}
 
 	public void registrarCupon() {

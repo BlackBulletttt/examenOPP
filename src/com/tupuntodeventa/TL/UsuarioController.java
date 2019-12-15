@@ -1,27 +1,44 @@
 package com.tupuntodeventa.TL;
 
-import com.tupuntodeventa.BL.Usuario.UsuarioBL;
+import com.tupuntodeventa.BL.Puesto.Obj.Puesto;
 import com.tupuntodeventa.BL.Usuario.Obj.*;
 
 import java.util.ArrayList;
 
-public class UsuarioController {
-    UsuarioBL logicaUsuarios = new UsuarioBL();
+public class UsuarioController extends CoreController{
 
-    public boolean registrarAdmin(int clave, String correoElectronico, String nombreUsuario, String contrasena, String nombreCompleto, String fechaNacimiento, int edad, String genero, int telefono) {
+    public boolean registrarAdmin(int identificacion, int clave, String correoElectronico, String nombreUsuario, String contrasena, String nombreCompleto, String fechaNacimiento, int edad, String genero, int telefono) {
         boolean err;
 
-        Admin nuevoAdmin = new Admin(clave, correoElectronico, nombreUsuario, contrasena, nombreCompleto, fechaNacimiento, edad, genero, telefono);
+        Admin nuevoAdmin = new Admin(identificacion, clave, correoElectronico, nombreUsuario, contrasena, nombreCompleto, fechaNacimiento, edad, genero, telefono);
 
         err = logicaUsuarios.registrarUsuario(nuevoAdmin);
 
         return err;
     }
 
-    public boolean registrarCliente(int clave, String correoElectronico, String nombreUsuario, String contrasena, String nombreCompleto, String fechaNacimiento, int edad, String genero, int telefono, int identificacion, String direccionExacta, String canton, String distrito, String provincia, int distancia) {
-        Cliente nuevoCliente = new Cliente(clave, correoElectronico, nombreUsuario, contrasena, nombreCompleto, fechaNacimiento, edad, genero, telefono, identificacion, direccionExacta, canton, distrito, provincia, distancia);
+    public boolean registrarCliente(int identificacion, int clave, String correoElectronico, String nombreUsuario, String contrasena, String nombreCompleto, String fechaNacimiento, int edad, String genero, int telefono, String direccionExacta, String canton, String distrito, String provincia, int distancia) {
+        Cliente nuevoCliente = new Cliente(identificacion, clave, correoElectronico, nombreUsuario, contrasena, nombreCompleto, fechaNacimiento, edad, genero, telefono, direccionExacta, canton, distrito, provincia, distancia);
 
         boolean err = logicaUsuarios.registrarUsuario(nuevoCliente);
+
+        return err;
+    }
+
+    public int registrarEmpleado(int identificacion, int clave, String correoElectronico, String nombreUsuario, String contrasena, String nombreCompleto, String fechaNacimiento, int edad, String genero, int telefono, String nombrePuesto) {
+        Puesto puesto = logicaPuestos.obtenerPuesto(nombrePuesto);
+        int err = 0;
+
+        if(puesto != null){
+            Empleado nuevoEmpleado = new Empleado(identificacion, clave, correoElectronico, nombreUsuario, contrasena, nombreCompleto, fechaNacimiento, edad, genero, telefono, puesto);
+
+            if(logicaUsuarios.registrarUsuario(nuevoEmpleado)){
+                err = 1;
+//              usuario repetido
+            }
+        }else{
+            err = 2;
+        }
 
         return err;
     }

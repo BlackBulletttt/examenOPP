@@ -140,18 +140,19 @@ public class MainView {
     public static void registrarAdmin() {
         ArrayList<String> infoUsuario = solicitarInfoUsuario();
 
-        int clave = Integer.parseInt(infoUsuario.get(0));
-        String correoElectronico = infoUsuario.get(1);
-        String nombreUsuario = infoUsuario.get(2);
-        String contrasena = infoUsuario.get(3);
-        String nombreCompleto = infoUsuario.get(4);
-        String fechaNacimiento = infoUsuario.get(5);
-        int edad = Integer.parseInt(infoUsuario.get(6));
-        String genero = infoUsuario.get(7);
-        int telefono = Integer.parseInt(infoUsuario.get(8));
+        int identificacion = Integer.parseInt(infoUsuario.get(0));
+        int clave = Integer.parseInt(infoUsuario.get(1));
+        String correoElectronico = infoUsuario.get(2);
+        String nombreUsuario = infoUsuario.get(3);
+        String contrasena = infoUsuario.get(4);
+        String nombreCompleto = infoUsuario.get(5);
+        String fechaNacimiento = infoUsuario.get(6);
+        int edad = Integer.parseInt(infoUsuario.get(7));
+        String genero = infoUsuario.get(8);
+        int telefono = Integer.parseInt(infoUsuario.get(9));
 
         if(edad >= 18){
-            boolean err = gestorUsuarios.registrarAdmin(clave, correoElectronico, nombreUsuario, contrasena, nombreCompleto, fechaNacimiento, edad, genero, telefono);
+            boolean err = gestorUsuarios.registrarAdmin(identificacion, clave, correoElectronico, nombreUsuario, contrasena, nombreCompleto, fechaNacimiento, edad, genero, telefono);
 
             if(err){
                 System.err.println("El usuario ya esta agregado en el sistema.");
@@ -170,18 +171,17 @@ public class MainView {
     public static void registrarCliente() {
         ArrayList<String> infoUsuario = solicitarInfoUsuario();
 
-        int clave = Integer.parseInt(infoUsuario.get(0));
-        String correoElectronico = infoUsuario.get(1);
-        String nombreUsuario = infoUsuario.get(2);
-        String contrasena = infoUsuario.get(3);
-        String nombreCompleto = infoUsuario.get(4);
-        String fechaNacimiento = infoUsuario.get(5);
-        int edad = Integer.parseInt(infoUsuario.get(6));
-        String genero = infoUsuario.get(7);
-        int telefono = Integer.parseInt(infoUsuario.get(8));
+        int identificacion = Integer.parseInt(infoUsuario.get(0));
+        int clave = Integer.parseInt(infoUsuario.get(1));
+        String correoElectronico = infoUsuario.get(2);
+        String nombreUsuario = infoUsuario.get(3);
+        String contrasena = infoUsuario.get(4);
+        String nombreCompleto = infoUsuario.get(5);
+        String fechaNacimiento = infoUsuario.get(6);
+        int edad = Integer.parseInt(infoUsuario.get(7));
+        String genero = infoUsuario.get(8);
+        int telefono = Integer.parseInt(infoUsuario.get(9));
 
-        System.out.println("Ingrese su identificacion: ");
-        int identificacion = in.nextInt();
 
         System.out.println("== A continuacion le pediremos la informacion de su dirección [ok] ==");
         in.nextLine();
@@ -195,7 +195,7 @@ public class MainView {
         int distancia = Integer.parseInt(infoDireccion.get(4));
 
         if(edad >= 15){
-            boolean err = gestorUsuarios.registrarCliente(clave, correoElectronico, nombreUsuario, contrasena, nombreCompleto, fechaNacimiento, edad, genero, telefono, identificacion, direccionExacta, canton, distrito, provincia, distancia);
+            boolean err = gestorUsuarios.registrarCliente(identificacion, clave, correoElectronico, nombreUsuario, contrasena, nombreCompleto, fechaNacimiento, edad, genero, telefono, direccionExacta, canton, distrito, provincia, distancia);
 
             if(err){
                 System.err.println("El usuario ya esta agregado en el sistema.");
@@ -213,6 +213,10 @@ public class MainView {
 //  solicita la informacion basica que cualquier usuario requiere
     public static ArrayList<String> solicitarInfoUsuario() {
         ArrayList<String> infoUsuario = new ArrayList<>();
+
+        in.nextLine();
+        System.out.println("Ingrese su identificacion:");
+        int identificacion = in.nextInt();
 
         in.nextLine();
         System.out.println("Ingrese la clave numeral:");
@@ -242,6 +246,7 @@ public class MainView {
         System.out.println("Ingrese el numero de telefono:");
         String telefono = in.nextLine();
 
+        infoUsuario.add(String.valueOf(identificacion));
         infoUsuario.add(clave);
         infoUsuario.add(correoElectronico);
         infoUsuario.add(nombreUsuario);

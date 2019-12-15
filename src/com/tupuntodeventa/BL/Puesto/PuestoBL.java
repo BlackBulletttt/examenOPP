@@ -27,4 +27,16 @@ public class PuestoBL{
 	public ArrayList<Puesto> obtenerPuestos() {
 		return listaPuestos;
 	}
+
+	public Puesto obtenerPuesto(String nombrePuesto) {
+		Puesto puestoEncontrado = null;
+
+		for(Puesto puesto : listaPuestos){
+			if(puesto.getNombre().equals(nombrePuesto)){
+				puestoEncontrado = puesto;
+			}
+		}
+
+		return puestoEncontrado;
+	}
 }
