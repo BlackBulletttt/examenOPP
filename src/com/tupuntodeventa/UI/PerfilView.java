@@ -295,7 +295,7 @@ public class PerfilView extends MainView {
 		}while(opcionProducto > 2);
 	}
 
-	public void registrarProductoSencillo() {
+	public void registrarProductoSencillo() throws Exception {
 		System.out.println("Ingrese un codigo para el producto: ");
 		int codigo = in.nextInt();
 
@@ -306,20 +306,16 @@ public class PerfilView extends MainView {
 		System.out.println("Ingrese el precio del platillo: ");
 		double precio = in.nextInt();
 
-		int err = gestorProductos.registrarSencillo(codigo, descripcion, precio);
+		boolean err = gestorProductos.registrarSencillo(codigo, descripcion, precio);
 
-		switch (err){
-			case 0:
-				System.out.println("Producto agregado con exito.");
-				break;
-
-			case 1:
-				System.err.println("El producto ya esta agregado en el sistema.");
-				break;
+		if(!err) {
+			System.out.println("Producto agregado con exito.");
+		}else{
+			System.err.println("El producto ya esta agregado en el sistema.");
 		}
 	}
 
-	public void registrarProductoCombo() {
+	public void registrarProductoCombo() throws Exception {
 		System.out.println("Ingrese un codigo para el producto: ");
 		int codigo = in.nextInt();
 
@@ -341,7 +337,11 @@ public class PerfilView extends MainView {
 				break;
 
 			case 1:
-				System.out.println("El producto ya esta agregado en el sistema.");
+				System.err.println("El producto ya esta agregado en el sistema.");
+				break;
+
+			case 2:
+				System.err.println("No se fue posible agregar los productos al combo, puede que no esten registrados.");
 				break;
 		}
 	}

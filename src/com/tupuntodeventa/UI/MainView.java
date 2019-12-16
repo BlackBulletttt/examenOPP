@@ -11,17 +11,17 @@ public class MainView {
     static Random rdm = new Random();
 
     static UsuarioController gestorUsuarios;
-
+    static ProductoController gestorProductos;
     static {
         try {
             gestorUsuarios = new UsuarioController();
+            gestorProductos = new ProductoController();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     static CuponController gestorCupones = new CuponController();
-    static  ProductoController gestorProductos = new ProductoController();
     static PuestoController gestorPuestos = new PuestoController();
     static OrdenController gestorOrdenes = new OrdenController();
 

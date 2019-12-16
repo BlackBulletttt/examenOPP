@@ -7,6 +7,12 @@ public class Combo extends Producto {
     private double total;
     private ArrayList<Sencillo> sencillos = new ArrayList<>();
 
+    public Combo(int codigo, String nombre, double total) {
+        super(codigo);
+        this.nombre = nombre;
+        this.total = total;
+    }
+
     public Combo(int codigo, String nombre, double total, Sencillo sencillo) {
         super(codigo);
         this.nombre = nombre;
