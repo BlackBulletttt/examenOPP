@@ -1,0 +1,1 @@
+jdbc:mysql://localhost/tupuntodeventa?useSSL=false_com.mysql.jdbc.Driver_root_mypass

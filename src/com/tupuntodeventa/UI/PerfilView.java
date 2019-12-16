@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class PerfilView extends MainView {
 
-	public void perfilMenu(){
+	public void perfilMenu() throws Exception {
 		int opcionMenu = 0;
 		do{
 			System.out.println("\n=== Bienvenido a <Su perfil> " +usuarioActivo.split("_")[2]+" ===\n");
@@ -42,7 +42,7 @@ public class PerfilView extends MainView {
 		}while(opcionMenu != 0);
 	}
 
-	public void procesarOpcionAdmin(int opcion){
+	public void procesarOpcionAdmin(int opcion) throws Exception {
 		switch (opcion){
 			case 0:
 				int opcionMenu = MainView.menu();
@@ -87,7 +87,7 @@ public class PerfilView extends MainView {
 		}
 	}
 
-	public void procesarOpcionCliente(int opcion){
+	public void procesarOpcionCliente(int opcion) throws Exception {
 		switch (opcion){
 			case 0:
 				int opcionMenu = MainView.menu();
@@ -151,7 +151,7 @@ public class PerfilView extends MainView {
 		}
 	}
 
-	public static void registrarEmpleado(){
+	public static void registrarEmpleado() throws Exception {
 		ArrayList<String> infoUsuario = MainView.solicitarInfoUsuario();
 
 		int identificacion = Integer.parseInt(infoUsuario.get(0));
@@ -224,6 +224,7 @@ public class PerfilView extends MainView {
 	public void listarOrdenes(){
 		String nombreCompletoUsuario;
 
+//		si el tipo de usuario es `0` es admin, asi se filtran TODAS las ordenes o las del usuario activo
 		if(usuarioActivo.split("_")[3].equals("0")){
 			nombreCompletoUsuario = "adm";
 		}else{
@@ -265,7 +266,7 @@ public class PerfilView extends MainView {
 		}
 	}
 
-	public void registrarProducto() {
+	public void registrarProducto() throws Exception {
 		int opcionProducto = 0;
 
 		do{
@@ -345,7 +346,7 @@ public class PerfilView extends MainView {
 		}
 	}
 
-	public void listarUsuarios() {
+	public void listarUsuarios() throws Exception {
 		ArrayList<String> listaInfoUsuarios = gestorUsuarios.obtenerInfoUsuarios();
 
 		for(String infoUsuario : listaInfoUsuarios){

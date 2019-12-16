@@ -12,6 +12,10 @@ public class Cliente extends Usuario{
         this.direcciones.add(new Direccion(direccionExacta, canton, distrito, provincia, distancia));
     }
 
+    public Cliente(int identificacion, int clave, String correoElectronico, String nombreUsuario, String contrasena, String nombreCompleto, String fechaNacimiento, int edad, String genero, int telefono) {
+        super(identificacion, clave, correoElectronico, nombreUsuario, contrasena, nombreCompleto, fechaNacimiento, edad, genero, telefono);
+    }
+
     public String toString() {
         String infoDirecciones = "";
 

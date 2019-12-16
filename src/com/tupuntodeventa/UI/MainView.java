@@ -10,7 +10,16 @@ public class MainView {
     static Scanner in = new Scanner(System.in);
     static Random rdm = new Random();
 
-    static UsuarioController gestorUsuarios = new UsuarioController();
+    static UsuarioController gestorUsuarios;
+
+    static {
+        try {
+            gestorUsuarios = new UsuarioController();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     static CuponController gestorCupones = new CuponController();
     static  ProductoController gestorProductos = new ProductoController();
     static PuestoController gestorPuestos = new PuestoController();
@@ -20,7 +29,7 @@ public class MainView {
 
     static String usuarioActivo;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         int opcionMenu = menu();
         procesarOpcion(opcionMenu);
     }
@@ -42,7 +51,7 @@ public class MainView {
     }
 
 //  procesa la opcion digitada por el usuario
-    public static void procesarOpcion(int opcion) {
+    public static void procesarOpcion(int opcion) throws Exception {
         switch (opcion){
             case 0:
                 System.out.println("\nGracias por su visita :)");
@@ -63,7 +72,7 @@ public class MainView {
     }
 
     //  solicita la informacion para el correcto proceso de verificacion del usuario
-    public static void iniciarSesion(){
+    public static void iniciarSesion() throws Exception {
         in.nextLine();
 
         System.out.println("Ingrese el nombre de usuario");
@@ -74,7 +83,6 @@ public class MainView {
 
         int verUsuario = verificarUsuario(nombreUsuario, claveUsuario);
 
-//        si admin existe valide y ejecute segun las posibilidades de la bandera `err`
         int opcion;
         switch (verUsuario){
             case 0:
@@ -99,7 +107,7 @@ public class MainView {
     }
 
     //  verifica la informacion digitada y retorna el estado de la verificacion
-    public static int verificarUsuario(String nombreUsuario, String contrasenaUsuario){
+    public static int verificarUsuario(String nombreUsuario, String contrasenaUsuario) throws Exception {
         int err = 0;
         boolean adm = false;
 
@@ -138,7 +146,7 @@ public class MainView {
     }
 
     //  solicita la informacion especifica para el correcto registro de un usuario administrador
-    public static void registrarAdmin() {
+    public static void registrarAdmin() throws Exception {
         ArrayList<String> infoUsuario = solicitarInfoUsuario();
 
         int identificacion = Integer.parseInt(infoUsuario.get(0));
@@ -153,7 +161,12 @@ public class MainView {
         int telefono = Integer.parseInt(infoUsuario.get(9));
 
         if(edad >= 18){
-            boolean err = gestorUsuarios.registrarAdmin(identificacion, clave, correoElectronico, nombreUsuario, contrasena, nombreCompleto, fechaNacimiento, edad, genero, telefono);
+            boolean err = false;
+            try {
+                err = gestorUsuarios.registrarAdmin(identificacion, clave, correoElectronico, nombreUsuario, contrasena, nombreCompleto, fechaNacimiento, edad, genero, telefono);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             if(err){
                 System.err.println("El usuario ya esta agregado en el sistema.");
@@ -169,7 +182,7 @@ public class MainView {
     }
 
     //  solicita la informacion especifica para el registro de un usuario cliente
-    public static void registrarCliente() {
+    public static void registrarCliente() throws Exception {
         ArrayList<String> infoUsuario = solicitarInfoUsuario();
 
         int identificacion = Integer.parseInt(infoUsuario.get(0));
@@ -215,7 +228,6 @@ public class MainView {
     public static ArrayList<String> solicitarInfoUsuario() {
         ArrayList<String> infoUsuario = new ArrayList<>();
 
-        in.nextLine();
         System.out.println("Ingrese su identificacion:");
         int identificacion = in.nextInt();
 
@@ -291,7 +303,7 @@ public class MainView {
     }
 
 //  obtengo los datos de los usuario en formato especifico para la validacion de inicio de sesion
-    private static ArrayList<String> obtenerInfoLogin() {
+    private static ArrayList<String> obtenerInfoLogin() throws Exception {
         ArrayList<String> listaInfoLogin = gestorUsuarios.obtenerInfoLoginUsuarios();
 
         return listaInfoLogin;

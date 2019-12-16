@@ -5,6 +5,10 @@ import com.tupuntodeventa.BL.Puesto.Obj.Puesto;
 public class Empleado extends Usuario {
 	private Puesto puesto;
 
+	public Empleado(int identificacion, int clave, String correoElectronico, String nombreUsuario, String contrasena, String nombreCompleto, String fechaNacimiento, int edad, String genero, int telefono) {
+		super(identificacion, clave, correoElectronico, nombreUsuario, contrasena, nombreCompleto, fechaNacimiento, edad, genero, telefono);
+	}
+
 	public Empleado(int identificacion, int clave, String correoElectronico, String nombreUsuario, String contrasena, String nombreCompleto, String fechaNacimiento, int edad, String genero, int telefono, Puesto puesto) {
 		super(identificacion, clave, correoElectronico, nombreUsuario, contrasena, nombreCompleto, fechaNacimiento, edad, genero, telefono);
 		this.puesto = puesto;
@@ -12,7 +16,7 @@ public class Empleado extends Usuario {
 
 	@Override
 	public String toString() {
-		String infoEmpleado = super.toString() + ", informacion del puesto:\n" + this.puesto.toString();
+		String infoEmpleado = super.toString();
 
 		return infoEmpleado;
 	}
@@ -21,6 +25,12 @@ public class Empleado extends Usuario {
 		boolean err = super.equals(nuevoEmpleado);
 
 		return err;
+	}
+
+	public String getInfoLogin() {
+		String infoUsuarioLogin = super.getInfoLogin() + "_" + 2;
+
+		return infoUsuarioLogin;
 	}
 
 	public Puesto getPuesto() {
